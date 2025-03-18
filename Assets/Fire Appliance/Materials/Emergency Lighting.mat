@@ -23,7 +23,7 @@ Material:
   m_Name: Emergency Lighting
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: f68e1a40a70fb8242b5a1c3dae116c7c, type: 2}
-  m_ModifiedSerializedProperties: 16
+  m_ModifiedSerializedProperties: 18
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
   - _SURFACE_TYPE_TRANSPARENT
@@ -57,6 +57,7 @@ Material:
     - _Metallic: 0
     - _Surface: 1
     - _ZWrite: 0
-    m_Colors: []
+    m_Colors:
+    - _EmissionColor: {r: 0, g: 0.16602969, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
