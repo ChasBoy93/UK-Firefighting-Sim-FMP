@@ -27,9 +27,12 @@ public class CarController : MonoBehaviour
     private float steerInput = 0;
 
     [Header("Car Settings")]
-    public float acceleration = 25f;
+    public float acceleration = 12.5f;
     public float maxSpeed = 56f;
     public float deceleration = 10f;
+    public float steerStrength = 15f;
+    public AnimationCurve turningCurve;
+    public float dragCoefficient = 1f;
 
     private Vector3 currentCarLocalVelocity = Vector3.zero;
     private float carVelocityRatio = 0;
@@ -64,17 +67,36 @@ public class CarController : MonoBehaviour
         {
             Acceleration();
             Decelatation();
+            Turn();
+            SidewaysDrag();
         }
     }
 
     void Acceleration()
     {
-        truckRB.AddForceAtPosition(acceleration * moveInput * transform.forward, accelerationPoint.position, ForceMode.Acceleration);
+        truckRB.AddForceAtPosition(acceleration * -moveInput * transform.forward, accelerationPoint.position, ForceMode.Acceleration);
     }
 
     void Decelatation()
     {
-        truckRB.AddForceAtPosition(deceleration * moveInput * -transform.forward, accelerationPoint.position, ForceMode.Acceleration);
+         truckRB.AddForceAtPosition(deceleration * -moveInput * -transform.forward, accelerationPoint.position, ForceMode.Acceleration);
+
+    }
+
+    void Turn()
+    {
+        truckRB.AddTorque(steerStrength * steerInput * turningCurve.Evaluate(Mathf.Abs(carVelocityRatio)) * transform.up, ForceMode.Acceleration);
+    }
+
+    void SidewaysDrag()
+    {
+        float currentSidewaysSpeed = currentCarLocalVelocity.x;
+
+        float dragMagnitude = -currentSidewaysSpeed * dragCoefficient;
+
+        Vector3 dragForce = transform.right * dragMagnitude;
+
+        truckRB.AddForceAtPosition(dragForce, truckRB.worldCenterOfMass, ForceMode.Acceleration);
     }
 
     #endregion
@@ -113,7 +135,7 @@ public class CarController : MonoBehaviour
     void GetPlayerInput()
     {
         moveInput = Input.GetAxis("Vertical");
-        steerInput = Input.GetAxis("Hoizontal");
+        steerInput = Input.GetAxis("Horizontal");
     }
 
     #endregion
