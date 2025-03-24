@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -11,6 +12,10 @@ public class CarController : MonoBehaviour
     public Transform[] rayPoints;
     public LayerMask driveable;
     public Transform accelerationPoint;
+    public GameObject[] tires = new GameObject[4];
+    public GameObject[] frontTireParents = new GameObject[2];
+    public AudioSource engineSound;
+    public bool engineOn = false;
 
     [Header("Suspension Settings")]
     public float springStiffness;
@@ -37,6 +42,17 @@ public class CarController : MonoBehaviour
     private Vector3 currentCarLocalVelocity = Vector3.zero;
     private float carVelocityRatio = 0;
 
+    [Header("Visuals")]
+    public float tireRotSpeed = 3000f;
+    public float maxSteeringAngle = 30f;
+
+    [Header("Audio")]
+    [SerializeField]
+    [Range(0, 1)] private float minPitch = 1f;
+
+    [SerializeField]
+    [Range(1, 5)] private float maxPitch = 5f;
+
     #region Unity Functions
 
     void Start()
@@ -50,11 +66,24 @@ public class CarController : MonoBehaviour
         GroundCheck();
         CalculateCarVelocity();
         Movment();
+        Visuals();
+        EngineSound();
     }
 
     void Update()
     {
         GetPlayerInput();
+        ToggleEngineSound();
+    }
+
+    #endregion
+
+    #region Input Handeling
+
+    void GetPlayerInput()
+    {
+        moveInput = Input.GetAxis("Vertical");
+        steerInput = Input.GetAxis("Horizontal");
     }
 
     #endregion
@@ -74,7 +103,11 @@ public class CarController : MonoBehaviour
 
     void Acceleration()
     {
-        truckRB.AddForceAtPosition(acceleration * -moveInput * transform.forward, accelerationPoint.position, ForceMode.Acceleration);
+        if (currentCarLocalVelocity.z < maxSpeed)
+        {
+            truckRB.AddForceAtPosition(acceleration * -moveInput * transform.forward, accelerationPoint.position, ForceMode.Acceleration);
+        }
+        
     }
 
     void Decelatation()
@@ -97,6 +130,58 @@ public class CarController : MonoBehaviour
         Vector3 dragForce = transform.right * dragMagnitude;
 
         truckRB.AddForceAtPosition(dragForce, truckRB.worldCenterOfMass, ForceMode.Acceleration);
+    }
+
+    #endregion
+
+    #region Visuals
+
+    void Visuals()
+    {
+        TireVisuals();
+    }
+    void TireVisuals()
+    {
+        float steeringAngle = maxSteeringAngle * steerInput;
+        for (int i = 0; i < tires.Length; i++)
+        {
+            if (i < frontTireParents.Length) 
+            {
+                frontTireParents[i].transform.localEulerAngles = new Vector3(frontTireParents[i].transform.localEulerAngles.x, steeringAngle, frontTireParents[i].transform.localEulerAngles.z);
+            }
+
+            tires[i].transform.Rotate(Vector3.right, tireRotSpeed * (i > 2 ? carVelocityRatio : moveInput) * Time.deltaTime, Space.Self);
+        }
+    }
+
+    void SetTirePosition(GameObject tire, Vector3 targetPosition)
+    {
+        tire.transform.position = targetPosition;
+    }
+
+    #endregion
+
+    #region Audio
+
+    void ToggleEngineSound()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (engineOn)
+            {
+                engineSound.Stop();
+                engineOn = false;
+            }
+            else
+            {
+                engineSound.Play();
+                engineOn = true;
+            }
+        }
+    }
+    void EngineSound()
+    {
+        engineSound.pitch = Mathf.Lerp(minPitch, maxPitch, Mathf.Abs(carVelocityRatio));
     }
 
     #endregion
@@ -126,19 +211,12 @@ public class CarController : MonoBehaviour
     {
         currentCarLocalVelocity = transform.InverseTransformDirection(truckRB.linearVelocity);
         carVelocityRatio = currentCarLocalVelocity.z / maxSpeed;
+
+
     }
 
     #endregion
 
-    #region Input Handeling
-
-    void GetPlayerInput()
-    {
-        moveInput = Input.GetAxis("Vertical");
-        steerInput = Input.GetAxis("Horizontal");
-    }
-
-    #endregion
 
     #region Suspension Functions
 
@@ -147,9 +225,9 @@ public class CarController : MonoBehaviour
         for(int i = 0; i < rayPoints.Length; i++)
         {
             RaycastHit hit;
-            float maxLength = restLength + springTravel;
+            float maxDistance = restLength + springTravel;
 
-            if (Physics.Raycast(rayPoints[i].position, -rayPoints[i].up, out hit, maxLength + wheelRadius, driveable))
+            if (Physics.Raycast(rayPoints[i].position, -rayPoints[i].up, out hit, maxDistance + wheelRadius, driveable))
             {
                 wheelsIsGrounded[i] = 1;
 
@@ -165,12 +243,19 @@ public class CarController : MonoBehaviour
 
                 truckRB.AddForceAtPosition(netForce * rayPoints[i].up, rayPoints[i].position);
 
+                // Visuals
+                SetTirePosition(tires[i], hit.point + rayPoints[i].up * wheelRadius);
+
                 Debug.DrawLine(rayPoints[i].position, hit.point, Color.red);
             }
             else
             {
                 wheelsIsGrounded[i] = 0;
-                Debug.DrawLine(rayPoints[i].position, rayPoints[i].position + (wheelRadius + maxLength) * -rayPoints[i].up, Color.red);
+
+                // Visuals
+                SetTirePosition(tires[i], rayPoints[i].position - rayPoints[i].up * maxDistance);
+
+                Debug.DrawLine(rayPoints[i].position, rayPoints[i].position + (wheelRadius + maxDistance) * -rayPoints[i].up, Color.red);
             }
         }
     }
