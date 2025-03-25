@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class CarController : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class CarController : MonoBehaviour
     public GameObject[] frontTireParents = new GameObject[2];
     public AudioSource engineSound;
     public bool engineOn = false;
+    public AudioSource startStopAudio; 
+    public AudioClip engineStartClip;
+    public AudioClip engineStopClip;
 
     [Header("Suspension Settings")]
     public float springStiffness;
@@ -169,15 +173,29 @@ public class CarController : MonoBehaviour
         {
             if (engineOn)
             {
+                // Stop the looping engine sound immediately
                 engineSound.Stop();
                 engineOn = false;
+
+                // Play stop sound
+                startStopAudio.PlayOneShot(engineStopClip);
             }
             else
             {
-                engineSound.Play();
-                engineOn = true;
+                // Play start sound
+                startStopAudio.PlayOneShot(engineStartClip);
+
+                // Start the engine loop after the start sound finishes
+                StartCoroutine(StartEngineAfterDelay(engineStartClip.length));
             }
         }
+    }
+
+    IEnumerator StartEngineAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        engineSound.Play();
+        engineOn = true;
     }
     void EngineSound()
     {
