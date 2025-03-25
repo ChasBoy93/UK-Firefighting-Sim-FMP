@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class VehicleEntry : MonoBehaviour
@@ -5,7 +6,9 @@ public class VehicleEntry : MonoBehaviour
     public GameObject vehicleCam;
     public GameObject thePlayer;
     public GameObject liveVehicle;
+    public GameObject eLightController;
     public bool canEnter = false;
+    public GameObject exitTrig;
 
     void Update()
     {
@@ -17,6 +20,10 @@ public class VehicleEntry : MonoBehaviour
                 vehicleCam.SetActive(true);
                 thePlayer.SetActive(false);
                 liveVehicle.GetComponent<CarController>().enabled = true;
+                eLightController.GetComponent<BlueLightController>().enabled = true;
+                canEnter = false;
+                thePlayer.transform.parent = this.gameObject.transform;
+                StartCoroutine(ExitTrigger());
             }
         }
     }
@@ -32,5 +39,11 @@ public class VehicleEntry : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
             canEnter = false;
+    }
+
+    IEnumerator ExitTrigger()
+    {
+        yield return new WaitForSeconds(0.5f);
+        exitTrig.SetActive(true);
     }
 }

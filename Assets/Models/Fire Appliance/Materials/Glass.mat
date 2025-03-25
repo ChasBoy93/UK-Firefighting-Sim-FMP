@@ -54,6 +54,8 @@ Material:
     m_Floats:
     - _DstBlend: 10
     - _DstBlendAlpha: 10
+    - _Metallic: 0.036
+    - _Smoothness: 0.392
     - _Surface: 1
     - _ZWrite: 0
     m_Colors:
