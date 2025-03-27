@@ -17,11 +17,15 @@ public class PlayerMovment : MonoBehaviour
     Vector3 velocity;
     bool isGrounded;
 
+    private bool hoseOn;
+    public GameObject hoseObject;
+
     void Update()
     {
+        UseHose();
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        if(isGrounded && velocity.y < 0)
+        if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
@@ -33,7 +37,7 @@ public class PlayerMovment : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
@@ -41,5 +45,23 @@ public class PlayerMovment : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    void UseHose()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (hoseOn)
+            {
+                hoseOn = false;
+                hoseObject.SetActive(false);
+
+            }
+            else
+            {
+                hoseOn = true;
+                hoseObject.SetActive(true);
+            }
+        }
     }
 }
