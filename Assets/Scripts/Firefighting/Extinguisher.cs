@@ -1,16 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Extinguisher : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject hose;
+    public float amountExtinguishedPerSecond = 1.0f;
+    private void Update()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (Physics.Raycast(hose.transform.position, hose.transform.forward, out RaycastHit hit, 100f)
+            && hit.collider.TryGetComponent(out Fire fire))
+            fire.TryExtinguish(amountExtinguishedPerSecond * Time.deltaTime);
     }
 }
