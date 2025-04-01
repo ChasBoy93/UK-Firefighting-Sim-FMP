@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -253,7 +253,7 @@ MonoBehaviour:
   - {fileID: 17}
   - {fileID: 12}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -318,7 +318,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -113556
+  m_LastSelectedObjectID: 64502
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -458,9 +458,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 7a40feff8c43feff6c44feffac57fefff8faffff
+      m_SelectedIDs: 5098fbff
+      m_LastClickedID: -288688
+      m_ExpandedIDs: b2b2fbffecddfbff0a0cfcffe8cafcff7acefcff6c07fdff508ffdff2ad6fdfff8faffff9a31010014fb1a00
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1078,9 +1078,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -295.8673, y: 7.479615, z: -61.35153}
+    m_Target: {x: -289.79446, y: 7.4864254, z: -72.85226}
     speed: 2
-    m_Value: {x: -295.8673, y: 7.479615, z: -61.35153}
+    m_Value: {x: -289.79446, y: 7.4864254, z: -72.85226}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1126,20 +1126,20 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.06231117, y: -0.45838073, z: 0.03221693, w: -0.88606614}
+    m_Target: {x: 0.022678146, y: -0.9391938, z: 0.063210115, w: 0.33704704}
     speed: 2
-    m_Value: {x: -0.06225821, y: -0.4596756, z: 0.03230799, w: -0.8853127}
+    m_Value: {x: 0.02267593, y: -0.939102, z: 0.06320394, w: 0.3370141}
   m_Size:
-    m_Target: 11.4566965
+    m_Target: 2.0406086
     speed: 2
-    m_Value: 11.4566965
+    m_Value: 2.0406086
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
-    m_Speed: 1
-    m_SpeedNormalized: 0.5
+    m_Speed: 0.94053
+    m_SpeedNormalized: 0.47
     m_SpeedMin: 0.001
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -1210,7 +1210,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/LowPolyCivilians/Prefabs
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1220,16 +1220,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/LowPolyCivilians/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\temp\year 1\Charlie Wood\Unity Projects\UK-Firefighting-Sim-FMP
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 94680100
-    m_LastClickedID: 92308
-    m_ExpandedIDs: 000000007c6701007e67010080670100826701008467010086670100886701008a6701008c6701008e670100906701009c680100b0680100b2680100b4680100c6680100ce4a20000cd9250000ca9a3b
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 84cb1b00
+    m_LastClickedID: 1821572
+    m_ExpandedIDs: 00000000a4670100a6670100a8670100aa670100ac670100ae670100b0670100b2670100b4670100b6670100b8670100ba670100bc670100be670100c0670100c2670100c4670100c6670100bc680100fa6d07003e4f0c00444f0c00b8f91a00f6b31b0000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1258,7 +1258,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007c6701007e67010080670100826701008467010086670100886701008a6701008c6701008e67010090670100
+    m_ExpandedIDs: 00000000a4670100a6670100a8670100aa670100ac670100ae670100b0670100b2670100b4670100b6670100b8670100ba670100bc670100be670100c0670100c2670100c4670100c6670100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1388,10 +1388,11 @@ MonoBehaviour:
     m_SaveData: []
     m_ContainerData: []
     m_OverlaysVisible: 1
-  m_ObjectsLockedBeforeSerialization: []
-  m_InstanceIDsLockedBeforeSerialization: 
+  m_ObjectsLockedBeforeSerialization:
+  - {fileID: 0}
+  m_InstanceIDsLockedBeforeSerialization: 26d6fbff
   m_PreviewResizer:
-    m_CachedPref: 160
+    m_CachedPref: 180
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
@@ -1399,5 +1400,5 @@ MonoBehaviour:
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
-    m_IsLocked: 0
+    m_IsLocked: 1
   m_PreviewWindow: {fileID: 0}
