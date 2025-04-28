@@ -1,10 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUi;
+
 
     private void Update()
     {
@@ -52,6 +54,11 @@ public class PauseMenu : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Quit Game");
+    }
+
+    public void ToMainMenu(string level)
+    {
+        SceneManager.LoadScene(level);
     }
 
 }
