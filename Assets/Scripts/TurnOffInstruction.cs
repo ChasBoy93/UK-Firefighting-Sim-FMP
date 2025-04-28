@@ -11,6 +11,7 @@ public class TurnOffInstruction : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Y))
         {
             buildingFireOne.SetActive(false);
+            crashOne.SetActive(false);
         }
     }
 }

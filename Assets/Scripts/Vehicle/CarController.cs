@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
 public class CarController : MonoBehaviour
 {
+    public GameObject markerLights;
+    public bool markerLightsOn = false;
     [Header("Referances")]
     public Rigidbody truckRB;
     public Transform[] rayPoints;
