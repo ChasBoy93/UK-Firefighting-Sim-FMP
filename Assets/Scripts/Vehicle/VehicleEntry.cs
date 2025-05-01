@@ -9,6 +9,7 @@ public class VehicleEntry : MonoBehaviour
     public GameObject eLightController;
     public bool canEnter = false;
     public GameObject exitTrig;
+    public GameObject enterText;
 
     void Update()
     {
@@ -19,6 +20,7 @@ public class VehicleEntry : MonoBehaviour
                 this.gameObject.GetComponent<BoxCollider>().enabled = false;
                 vehicleCam.SetActive(true);
                 thePlayer.SetActive(false);
+                enterText.SetActive(false);
                 liveVehicle.GetComponent<CarController>().enabled = true;
                 eLightController.GetComponent<BlueLightController>().enabled = true;
                 canEnter = false;
@@ -33,12 +35,17 @@ public class VehicleEntry : MonoBehaviour
         if(other.tag == "Player")
         {
             canEnter = true;
+            if(canEnter == true)
+            {
+                enterText.SetActive(true);
+            }
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-            canEnter = false;
+        canEnter = false;
+        enterText.SetActive(false);
     }
 
     IEnumerator ExitTrigger()
