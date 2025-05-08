@@ -10,6 +10,7 @@ public class VehicleEntry : MonoBehaviour
     public bool canEnter = false;
     public GameObject exitTrig;
     public GameObject enterText;
+    public GameObject firefighterModel;
 
     void Update()
     {
@@ -21,6 +22,7 @@ public class VehicleEntry : MonoBehaviour
                 vehicleCam.SetActive(true);
                 thePlayer.SetActive(false);
                 enterText.SetActive(false);
+                firefighterModel.SetActive(true);
                 liveVehicle.GetComponent<CarController>().enabled = true;
                 eLightController.GetComponent<BlueLightController>().enabled = true;
                 canEnter = false;

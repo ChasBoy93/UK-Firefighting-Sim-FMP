@@ -9,6 +9,7 @@ public class VehicleExit : MonoBehaviour
     public GameObject liveVehicle;
     public GameObject eLightController;
     public GameObject entryTrig;
+    public GameObject firefighterModel;
 
     void Update()
     {
@@ -16,6 +17,7 @@ public class VehicleExit : MonoBehaviour
         {
             thePlayer.SetActive(true);
             vehicleCam.SetActive(false);
+            firefighterModel.SetActive(false);
             liveVehicle.GetComponent<CarController>().enabled = false;
             eLightController.GetComponent<BlueLightController>().enabled = false;
             thePlayer.transform.parent = null;
