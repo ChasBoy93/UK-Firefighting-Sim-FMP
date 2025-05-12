@@ -89,6 +89,7 @@ MonoBehaviour:
   - {fileID: 8545369633802450874}
   - {fileID: 383055280105375430}
   - {fileID: -8663043431694825370}
+  - {fileID: 4699665566489955750}
 --- !u!114 &383055280105375430
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -101,19 +102,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   skipIterations:
     m_OverrideState: 1
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 4.78
+    m_Value: 3.03
   intensity:
     m_OverrideState: 1
-    m_Value: 0.52
+    m_Value: 1.35
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.8
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -170,6 +171,52 @@ MonoBehaviour:
   highlightsEnd:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &4699665566489955750
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
+  m_Name: DepthOfField
+  m_EditorClassIdentifier: 
+  active: 1
+  mode:
+    m_OverrideState: 1
+    m_Value: 1
+  gaussianStart:
+    m_OverrideState: 1
+    m_Value: 229.7
+  gaussianEnd:
+    m_OverrideState: 1
+    m_Value: 134.6
+  gaussianMaxRadius:
+    m_OverrideState: 1
+    m_Value: 0.883
+  highQualitySampling:
+    m_OverrideState: 1
+    m_Value: 0
+  focusDistance:
+    m_OverrideState: 1
+    m_Value: 10
+  aperture:
+    m_OverrideState: 1
+    m_Value: 5.6
+  focalLength:
+    m_OverrideState: 1
+    m_Value: 50
+  bladeCount:
+    m_OverrideState: 1
+    m_Value: 5
+  bladeCurvature:
+    m_OverrideState: 1
+    m_Value: 1
+  bladeRotation:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &8536670755314318852
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -188,7 +235,7 @@ MonoBehaviour:
     m_Value: 0.5
   contrast:
     m_OverrideState: 1
-    m_Value: -3
+    m_Value: 3
   colorFilter:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -197,7 +244,7 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: 70
+    m_Value: 80
 --- !u!114 &8545369633802450874
 MonoBehaviour:
   m_ObjectHideFlags: 3
