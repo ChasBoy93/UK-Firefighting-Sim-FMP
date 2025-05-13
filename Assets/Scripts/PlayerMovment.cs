@@ -19,6 +19,7 @@ public class PlayerMovment : MonoBehaviour
 
     private bool hoseOn;
     public GameObject hoseObject;
+    public AudioSource hoseSound;
 
     void Update()
     {
@@ -55,12 +56,14 @@ public class PlayerMovment : MonoBehaviour
             {
                 hoseOn = false;
                 hoseObject.SetActive(false);
+                hoseSound.Stop();
 
             }
             else
             {
                 hoseOn = true;
                 hoseObject.SetActive(true);
+                hoseSound.Play();
             }
         }
     }

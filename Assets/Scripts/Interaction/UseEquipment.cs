@@ -6,6 +6,8 @@ public class UseEquipment : MonoBehaviour
 {
     public GameObject equipmentUI;
     public GameObject useText;
+    public AudioSource openLockerAudio;
+    public AudioSource closeLockerAudio;
     private bool canUseEquip = false;
     void Update()
     {
@@ -37,6 +39,7 @@ public class UseEquipment : MonoBehaviour
                 Cursor.visible = true;
                 equipmentUI.SetActive(true);
                 useText.SetActive(false);
+                openLockerAudio.Play();
             }
         }
     }
@@ -46,5 +49,6 @@ public class UseEquipment : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         equipmentUI.SetActive(false);
+        closeLockerAudio.Play();
     }
 }
