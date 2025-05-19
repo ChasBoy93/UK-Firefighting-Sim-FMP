@@ -55,4 +55,13 @@ public class Fire : MonoBehaviour
             emission.rateOverTime = currentIntensity * startIntensities[i];
         }
     }
+
+    public void Reignite(float intensity)
+    {
+        currentIntensity = Mathf.Clamp01(intensity);
+        isLit = true;
+        ChangeIntensity();
+    }
+
+
 }
